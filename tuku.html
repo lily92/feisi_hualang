@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/swiper.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" media="screen and (max-width:767px)" href="css/phone.css" />
+  <script src="js/jquery.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="layui/layui.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/main.js"></script>
+  <title>飞思-图库</title>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+
+  </header>
+  <!--end  header -->
+  <div class="main  tuku">
+    <div class="tuku-con padding-l30 padding-r30">
+      <div class=" padding-b30 flex flex-al-center flex-just-between p-just-right">
+        <ul class="flex tuku-list-tab fon20">
+          <li class="active">
+            <a href="">人像</a>
+          </li>
+          <li>
+            <a href="">静物</a>
+          </li>
+          <li>
+            <a href="">风光</a>
+          </li>
+          <li>
+            <a href="">纪实</a>
+          </li>
+
+        </ul>
+        <div class="total-img fon16 title-phone">
+          <span> 共235张</span>
+        </div>
+      </div>
+      <ul class="list row tuku_list flex" id="tuku_list">
+        <!-- <li>
+          <div class="sheying-img positionr">
+            <img src="images/tuku-bg.jpg" alt="" srcset="" class="w100">
+            <div class="positionb">
+              <img src="images/tuku.jpg" alt="" srcset=""  class="w100">
+            </div>
+          </div>
+          <p class="fon16 name">AlexWong</p>
+        </li> -->
+      </ul>
+      <script id="tuku_tpl" type="text/html">
+        {{#  layui.each(d.list, function(index, item){ }}
+        <li  class='col-sm-4 col-xs-6' >
+         <a href=""  class='positionr'>
+          <div class="sheying-img positionr">
+            <!-- 图片占位符，勿读后台 -->
+            <img src="images/tuku-bg.jpg" alt="" srcset="" class="w100">
+            <!-- end 图片占位符，勿读后台 -->
+            <div class="positionb">
+              <img src="{{item.img}}" alt="" srcset=""  class="w100 scale trans ">
+            </div>
+          </div>
+
+          <div class="master flex flex-al-center  positionb trans  showGallery" >
+            <img src="images/icon-scale.png" alt="" srcset="" class='icon-scale trans '>
+          </div>
+          <div class="share-title flex flex-al-center  trans">
+            <div  class='flex flex-al-center'>
+              <img src="images/icon-arv.png" alt="" srcset="">
+              <span class='fon18 colorf tu-author'>周鸣华</span>
+            </div>
+            <div class='share-icon'>
+              <img src="images/icon-share.png" alt="" srcset="">
+            </div>
+          </div>
+         </a>
+        </li>
+          {{#  }); }}
+       </script>
+
+    </div>
+  </div>
+
+  <div class="fix-tuku flex flex-al-center flex-just-between trans">
+    <!-- 关闭按钮 -->
+    <a href="javascript:void(0);" class="close-btn">
+      <img src="images/icon-close.png" alt="">
+    </a>
+    <div class=" max1145 tuku-swiper">
+      <div class=" max1036 ">
+        <div class="positionr">
+          <div class="swiper-container gallery-top  ">
+            <div class="swiper-wrapper" id="viewLarge">
+              <div class="swiper-slide positionr">
+                <!-- 图片占位符 -->
+                <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+                <div class="positionb">
+                  <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+                </div>
+              </div>
+            </div>
+            <script id="tuku_large_tpl" type="text/html">
+              {{#  layui.each(d.list, function(index, item){ }}
+              <div class="swiper-slide positionr">
+                <!-- 图片占位符 -->
+                <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+                <div class="positionb">
+                  <img src="item.largeImg"" alt="" class="w100">
+                </div>
+              </div>
+                {{#  }); }}
+            </script>
+          </div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next swiper-button-white"></div>
+          <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+
+        <div class="swiper-container gallery-thumbs">
+          <div class="swiper-wrapper " id="viewSmall">
+            <div class="swiper-slide positionr">
+              <!--图片占位符，勿读后台  -->
+              <img src="images/zuopin-xiaotu.jpg" alt="" srcset="" class="w100">
+              <!--end 图片占位符，勿读后台  -->
+              <div class="positionb">
+                <img src="images/zuopin-xiaotu.jpg" alt="" srcset="" class="w100">
+              </div>
+            </div>
+
+          </div>
+          <script id="tuku_small_tpl" type="text/html">
+            {{#  layui.each(d.list, function(index, item){ }}
+            <div class="swiper-slide positionr">
+              <!-- 图片占位符 -->
+              <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+              <div class="positionb">
+                <img src="item.smallImg"" alt="" class="w100">
+              </div>
+            </div>
+              {{#  }); }}
+          </script>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+   
+    layui.use('laytpl', function () {
+      var laytpl = layui.laytpl;
+      var tuku_list = {
+        //图库data
+        "list": [
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku-img.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku-img.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          },
+          {
+            "id": "02",
+            "name": "AlexWong",
+            "img": "images/tuku.jpg"
+          }
+        ]
+      }
+      var tuku_d_list = {
+        "list": [
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu.jpg",
+            "largeImg": "images/sheyingshi-zuopin.jpg"
+          }
+        ]
+      }
+      var tuku_tpls = tuku_tpl.innerHTML;
+      var tuku_tpls_large = tuku_large_tpl.innerHTML;
+      var tuku_tpls_small = tuku_small_tpl.innerHTML;
+      var view = document.getElementById('tuku_list');
+      var viewLarge = document.getElementById('viewLarge');
+      var viewSmall = document.getElementById('viewSmall');
+      laytpl(tuku_tpls).render(tuku_list, function (html) {
+        view.innerHTML = html;
+        // 显示图库详情列表
+        $('.showGallery').click(function (e) {
+          e.preventDefault();
+          console.log($(this).parent().parent().index())
+          console.log('ajax更新swiper数据，并且重新初始化')
+          $('.fix-tuku').addClass('active');
+        });
+      });
+      laytpl(tuku_tpls_large).render(tuku_d_list, function (html) {
+        viewLarge.innerHTML = html;
+      });
+      laytpl(tuku_tpls_small).render(tuku_d_list, function (html) {
+        viewSmall.innerHTML = html;
+      });
+
+      var galleryThumbs = new Swiper('.gallery-thumbs', {
+      spaceBetween: 10,
+      slidesPerView: 8,
+      loop: true,
+      freeMode: true,
+      loopedSlides: 5, //looped slides should be the same
+      watchSlidesVisibility: true,
+      watchSlidesProgress: true,
+      breakpoints: {
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: 6,
+          spaceBetween: 10,
+        },
+      }
+    });
+    var galleryTop = new Swiper('.gallery-top', {
+      spaceBetween: 10,
+      loop: true,
+      loopedSlides: 5, //looped slides should be the same
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      thumbs: {
+        swiper: galleryThumbs,
+      },
+    });
+
+
+
+    })
+  </script>
+  <script>
+
+    $(function () {
+
+      $('.close-btn').click(function (e) {
+        e.preventDefault();
+        $('.fix-tuku').removeClass('active');
+
+      });
+
+    })
+  </script>
+
+
+
+  <!--star  footer -->
+  <footer>
+  </footer>
+  <!-- end footer -->
+
+</body>
+
+</html>
