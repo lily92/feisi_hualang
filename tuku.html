@@ -21,7 +21,6 @@
 <body>
   <!-- header -->
   <header>
-
   </header>
   <!--end  header -->
   <div class="main  tuku">
@@ -60,7 +59,7 @@
       <script id="tuku_tpl" type="text/html">
         {{#  layui.each(d.list, function(index, item){ }}
         <li  class="col-sm-4 col-xs-6" >
-         <a href=""  class="positionr">
+         <a href="javascript:void(0);"  class="positionr">
           <div class="sheying-img positionr">
             <!-- 图片占位符，勿读后台 -->
             <img src="images/tuku-bg.jpg" alt="" srcset="" class="w100">
@@ -99,7 +98,7 @@
         <div class="positionr">
           <div class="swiper-container gallery-top  ">
             <div class="swiper-wrapper" id="viewLarge">
-             
+
             </div>
             <script id="tuku_large_tpl" type="text/html">
               {{#  layui.each(d.list, function(index, item){ }}
@@ -120,7 +119,7 @@
 
         <div class="swiper-container gallery-thumbs">
           <div class="swiper-wrapper " id="viewSmall">
-        
+
           </div>
           <script id="tuku_small_tpl" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
@@ -139,9 +138,10 @@
 
   </div>
   <script>
-   
+
     layui.use(['laytpl', 'flow'], function () {
       var laytpl = layui.laytpl;
+      var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
       var tuku_list = {
         //图库data
         "list": [
@@ -247,7 +247,7 @@
           }
         ]
       }
-     
+
       var tuku_tpls = tuku_tpl.innerHTML;
       var tuku_tpls_large = tuku_large_tpl.innerHTML;
       var tuku_tpls_small = tuku_small_tpl.innerHTML;
@@ -256,35 +256,35 @@
       var viewSmall = document.getElementById('viewSmall');
       laytpl(tuku_tpls).render(tuku_list, function (html) {
         view.innerHTML = html;
-        // 显示图库详情列表
-        // $('.showGallery').click(function (e) {
-        //   e.preventDefault();
-        //   console.log($(this).parent().parent().index())
-        //   console.log('ajax更新swiper数据，并且重新初始化')
-        //   $('.fix-tuku').addClass('active');
-        // });
-      });
-      
-      var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
-          var flow = layui.flow;
-          flow.load({
-            elem: '#tuku_list' //指定列表容器
-            ,isLazyimg:false
-            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
-              var lis = [];
-              //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
-              $.get('js/list_tuku.json?page=' + page, function (res) {
-                //假设你的列表返回在data集合中
-                layui.each(res.list, function (index, item) {
-                  lis.push(' <li class="col-sm-4 col-xs-6" ><a href=""  class="positionr"><div class="sheying-img positionr"><img src="images/tuku-bg.jpg" alt="" srcset="" class="w100"><div class="positionb"><img src="'+item.img+'" alt="" srcset=""  class="w100 scale trans "></div></div><div class="master flex flex-al-center  positionb trans  showGallery" ><img src="images/icon-scale.png" alt="" srcset="" class="icon-scale trans "></div><div class="share-title flex flex-al-center  trans"><div  class="flex flex-al-center"><img src="images/icon-arv.png" alt="" srcset=""><span class="fon18 colorf tu-author">'+item.name+'</span></div><div class="share-icon"><img src="images/icon-share.png" alt="" srcset=""> </div></div></a></li>');
-                });
-                next(lis.join(''), page < res.pages);
-              });
-            }
-          });
 
-      
-      
+        // 显示图库详情列表
+        $("#tuku_list").delegate(".showGallery", "click", function (e) {
+          e.preventDefault(); 
+          $('.fix-tuku').addClass('active');
+        });
+      });
+
+
+      var flow = layui.flow;
+      flow.load({
+        elem: '#tuku_list' //指定列表容器
+        , isLazyimg: false
+        , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+          var lis = [];
+          //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+          $.get('js/list_tuku.json?page=' + page, function (res) {
+            //假设你的列表返回在data集合中
+            layui.each(res.list, function (index, item) {
+              lis.push(' <li class="col-sm-4 col-xs-6" ><a href=""  class="positionr"><div class="sheying-img positionr"><img src="images/tuku-bg.jpg" alt="" srcset="" class="w100"><div class="positionb"><img src="' + item.img + '" alt="" srcset=""  class="w100 scale trans "></div></div><div class="master flex flex-al-center  positionb trans  showGallery" ><img src="images/icon-scale.png" alt="" srcset="" class="icon-scale trans "></div><div class="share-title flex flex-al-center  trans"><div  class="flex flex-al-center"><img src="images/icon-arv.png" alt="" srcset=""><span class="fon18 colorf tu-author">' + item.name + '</span></div><div class="share-icon"><img src="images/icon-share.png" alt="" srcset=""> </div></div></a></li>');
+            });
+            next(lis.join(''), page < res.pages);
+          });
+        
+        }
+      });
+
+
+
       laytpl(tuku_tpls_large).render(tuku_d_list, function (html) {
         viewLarge.innerHTML = html;
       });
@@ -293,40 +293,40 @@
       });
 
       var galleryThumbs = new Swiper('.gallery-thumbs', {
-      spaceBetween: 10,
-      slidesPerView: 8,
-      loop: true,
-      freeMode: true,
-      loopedSlides: 5, //looped slides should be the same
-      watchSlidesVisibility: true,
-      watchSlidesProgress: true,
-      breakpoints: {
-        640: {
-          slidesPerView: 4,
-          spaceBetween: 10,
+        spaceBetween: 10,
+        slidesPerView: 8,
+        loop: true,
+        freeMode: true,
+        loopedSlides: 5, //looped slides should be the same
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 6,
+            spaceBetween: 10,
+          },
+        }
+      });
+      var galleryTop = new Swiper('.gallery-top', {
+        spaceBetween: 10,
+        loop: true,
+        loopedSlides: 5, //looped slides should be the same
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 10,
+        thumbs: {
+          swiper: galleryThumbs,
         },
-        1024: {
-          slidesPerView: 6,
-          spaceBetween: 10,
-        },
-      }
-    });
-    var galleryTop = new Swiper('.gallery-top', {
-      spaceBetween: 10,
-      loop: true,
-      loopedSlides: 5, //looped slides should be the same
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      thumbs: {
-        swiper: galleryThumbs,
-      },
-    });
+      });
 
 
 
@@ -335,16 +335,16 @@
   <script>
 
     $(function () {
-     
+
       $('.close-btn').click(function (e) {
         e.preventDefault();
         $('.fix-tuku').removeClass('active');
 
       });
-     
+
 
     })
-    window.onload = function(){
+    window.onload = function () {
       $('header nav li').eq(0).addClass('active')
     }
   </script>

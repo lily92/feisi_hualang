@@ -753,6 +753,9 @@ h3 {
     width: 90%;
     padding: 0 15px;
   }
+  .close-btn {
+    top: 10px;
+  }
 }
 
 .layui-flow-more {
