@@ -27,7 +27,7 @@
   <div class="main  sheyingshi">
     <div class="sheyingshi-con padding-l30 padding-r30">
       <h3 class="fon36 padding-b30 title-phone">Photographer 摄影师</h3>
-      <ul class="list row sheyingshi_list flex"  id="sheyingshi_list">
+      <ul class="list  sheyingshi_list flex" id="sheyingshi_list">
         <!-- <li>
           <div class="sheying-img positionr">
             <img src="images/sheyingshi-bg.jpg" alt="" srcset="" class="w100">
@@ -53,12 +53,37 @@
         </li>
           {{#  }); }}
        </script>
-       <script>
-        layui.use('laytpl', function () {
+      <script>
+        layui.use(['laytpl', 'flow'], function () {
           var laytpl = layui.laytpl;
           var sheyingshi_list = {
             //品牌新闻数据
             "list": [
+              {
+                "id": "02",
+                "name": "AlexWong",
+                "img": "images/sheyingshi.jpg"
+              },
+              {
+                "id": "02",
+                "name": "AlexWong",
+                "img": "images/sheyingshi.jpg"
+              },
+              {
+                "id": "02",
+                "name": "AlexWong",
+                "img": "images/sheyingshi.jpg"
+              },
+              {
+                "id": "02",
+                "name": "AlexWong",
+                "img": "images/sheyingshi.jpg"
+              },
+              {
+                "id": "02",
+                "name": "AlexWong",
+                "img": "images/sheyingshi.jpg"
+              },
               {
                 "id": "02",
                 "name": "AlexWong",
@@ -116,8 +141,29 @@
           laytpl(sheyingshi_tpls).render(sheyingshi_list, function (html) {
             view.innerHTML = html;
           });
+          var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+          var flow = layui.flow;
+          flow.load({
+            elem: '#sheyingshi_list' //指定列表容器
+            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+              var lis = [];
+              //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+              $.get('js/list.json?page=' + page, function (res) {
+                //假设你的列表返回在data集合中
+                layui.each(res.list, function (index, item) {
+                  lis.push("<li><a href='sheyingshi-detail.html'><div class='sheying-img positionr'><img src='images/sheyingshi-bg.jpg' alt='' srcset='' class=''><div class='positionb'><img src='"+item.img+"' alt='' srcset=''  class=''></div></div><p class='fon16 name'>"+item.name+"</p></a></li>");
+                });
+                next(lis.join(''), page < res.pages);
+              });
+            }
+          });
 
         })
+        window.onload = function () {
+          $('header nav li').eq(1).addClass('active')
+        }
+
+
       </script>
     </div>
   </div>

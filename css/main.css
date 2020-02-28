@@ -278,7 +278,7 @@ header nav a {
 }
 
 header nav li {
-  margin: 15px 0;
+  margin: 30px 0 0;
   position: relative;
 }
 
@@ -321,19 +321,47 @@ header nav a:hover {
   padding-bottom: 60px;
 }
 
+.about-con {
+  padding: 60px 0;
+}
+
 .w40 {
   width: 46%;
   padding: 0 3%;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 .w60 {
-  width: 54%;
+  width: calc(100% - 52% - 60px);
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 h3 {
   font-weight: normal;
+}
+
+.w40::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 5px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+
+.w40::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #888;
+}
+
+.w40::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: #EDEDED;
 }
 
 /*contact*/
@@ -368,6 +396,11 @@ h3 {
   background: #00a0e9;
   color: #fff;
   border: 0;
+  transition: .3s linear all;
+}
+
+.conact .btn:hover {
+  background: #0190d2;
 }
 
 .padding-l30 {
@@ -459,6 +492,7 @@ h3 {
 
 .sheyingshi-img {
   margin-bottom: 25px;
+  max-width: 280px;
 }
 
 .sheyingshi .gallery-thumbs {
@@ -466,7 +500,7 @@ h3 {
 }
 
 .sheyingshi .swiper-button-next, .sheyingshi .swiper-button-prev {
-  transform: scale(0.8);
+  transform: scale(0.7);
 }
 
 .sheyingshi .swiper-button-next {
@@ -603,6 +637,21 @@ h3 {
   border: 5px solid #fff;
 }
 
+.tuku-swiper .gallery-thumbs .swiper-slide {
+  height: 100%;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active::after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.5);
+}
+
 .close-btn {
   position: fixed;
   right: 30px;
@@ -635,6 +684,11 @@ h3 {
 
 .margin-b30 {
   margin-bottom: 30px;
+}
+
+.padding-tb0 {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 @media (max-width: 1200px) {
@@ -692,11 +746,27 @@ h3 {
   .w78 .padding-l30 {
     padding-left: 15px;
   }
+  .fon24 {
+    font-size: 20px;
+  }
+  .conact .contact-box {
+    width: 90%;
+    padding: 0 15px;
+  }
+}
+
+.layui-flow-more {
+  width: 100%;
+  text-align: center;
+  clear: both;
 }
 
 @media (max-width: 1024px) {
   .fon40 {
     font-size: 25px;
+  }
+  .fon24 {
+    font-size: 18px;
   }
   .w22 {
     width: 100%;
@@ -707,5 +777,26 @@ h3 {
   }
   .ipad-text-center {
     text-align: center;
+  }
+  .conact .contact-box {
+    width: 95%;
+    padding: 0 10px;
+  }
+  .conact .txt {
+    height: 40px;
+  }
+  .sheyingshi-img {
+    margin: 0 auto;
+  }
+  .w40 {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    height: auto;
+  }
+  .w60 {
+    width: 100%;
+    padding: 0 15px;
+    position: static;
   }
 }

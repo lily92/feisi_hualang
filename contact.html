@@ -28,31 +28,32 @@
     <div class="contact-box flex flex-al-center ">
       <div class="flex">
         <div class="col-sm-6 color3 flex flex-al-center">
-           <div>
+          <div>
             <div class="margin-b30">
               <p class="fon32">提交相片或与我们联络</p>
               <p class="fon24">所有提交作品均需为Phase One相机拍摄</p>
             </div>
             <div class="margin-b30">
               <p> 单张图片具体要求为合适jgp、分辨率300以上、长边不低于2000、文件不低于5M，高于25M,并在提交素材的同事提供详细文字说明</p>
-            
+
               <p>参加者需阅读 版权素材授权协议 的条款，并以电邮方式提交作品</p>
-             
+
               <p class="margin-b30">电邮地址</p>
               <p>info@phoaseone.com.cn</p>
 
-             
+
               <p class="margin-b30">办公室电话</p>
               <p>+86 20 8920 2460</p>
             </div>
-           </div>
+          </div>
         </div>
         <form class="col-sm-6 flex-al-center flex layui-form">
           <div>
             <input type="text" class="txt w100" placeholder="用户" name="username" lay-verify="required|username">
             <input type="text" class="txt w100" placeholder="电邮地址" name="email" lay-verify="email">
             <input type="text" class="txt w100" placeholder="主题" name='topic' lay-verify="required">
-            <textarea name="message" id="" cols="30" rows="4" class="txt w100 h60" placeholder="信息" lay-verify="required"></textarea>
+            <textarea name="message" id="" cols="30" rows="4" class="txt w100 h60" placeholder="信息"
+              lay-verify="required"></textarea>
             <button class="btn w100" lay-submit lay-filter="submitForm">提交</button>
           </div>
         </form>
@@ -68,6 +69,9 @@
               return false;
             });
           });
+          window.onload = function () {
+            $('header nav li').eq(3).addClass('active')
+          }
         </script>
       </div>
     </div>

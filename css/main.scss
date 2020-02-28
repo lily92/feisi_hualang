@@ -228,7 +228,7 @@ header {
   top: 0;
   z-index: 2;
   nav a{ color: $color3;}
-  nav li{ margin: 15px 0; position: relative;}
+  nav li{ margin: 30px 0 0; position: relative;}
   nav li::before{content: ''; width: 3px; height: 90%;position: absolute; left: -15px; top: 5%; transition: .2s linear all; opacity: 0; transform: translateX(-100%);}
   nav li.active::before,nav li:hover::before{  background: #00a0e9;   opacity: 1;transform: translateX(0);}
   nav li.active a,nav li:hover a{ color: #00a0e9;}
@@ -236,9 +236,24 @@ header {
   nav a:hover{ color: #00a0e9;}
 }
 .main{ width: 100%; min-height: 100vh; padding-left:260px ; text-align: justify; padding-top: 60px; padding-bottom: 60px;}
-.w40{ width: 46%;  padding: 0 3%; padding-top:60px; padding-bottom:60px;}
-.w60{ width: 54%;}
+.about-con{padding: 60px 0;}
+.w40{ width: 46%;  padding: 0 3%; overflow-y: auto;height: 100vh; }
+.w60{ width:calc(100% - 52% - 60px) ; position: fixed; top: 0; right: 0;}
 h3{ font-weight: normal;}
+.w40::-webkit-scrollbar {/*滚动条整体样式*/
+  width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.w40::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+  border-radius:5px;
+   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  background: #888;
+}
+.w40::-webkit-scrollbar-track {/*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  background: #EDEDED;
+}
 
 /*contact*/
 .conact{
@@ -246,7 +261,8 @@ h3{ font-weight: normal;}
   .contact-box{ width: 80%; min-height: 80vh; background: rgba(255, 255, 255, 0.8); padding: 0 30px; }
   .txt{ border: 1px solid #666; padding: 5px 10px; height: 51px; background: transparent; margin-bottom: 25px;}
   .txt.h60{ height: 80px; resize: none;}
-  .btn{ height: 51px; background: #00a0e9; color: #fff; border: 0;}
+  .btn{ height: 51px; background: #00a0e9; color: #fff; border: 0; transition: .3s linear all;}
+  .btn:hover{ background: #0190d2;}
   
 } 
 .padding-l30{ padding-left: 30px;}
@@ -267,10 +283,10 @@ h3{ font-weight: normal;}
 .w78{ width: 78%;}
 .border-left{ position: relative; margin-bottom: 20px;}
 .border-left::after{ content: ''; width: 5px; height: 100%; position: absolute; left: -30px; top: 0; background: #00a0e9;}
-.sheyingshi-img{ margin-bottom: 25px;}
+.sheyingshi-img{ margin-bottom: 25px; max-width: 280px;}
 .sheyingshi{
   .gallery-thumbs{padding-top: 20px;}
-  .swiper-button-next, .swiper-button-prev{ transform: scale(0.8);}
+  .swiper-button-next, .swiper-button-prev{ transform: scale(0.7);}
   .swiper-button-next{ right: -40px;}
   .swiper-button-prev{left: -40px;}
 }
@@ -307,6 +323,14 @@ h3{ font-weight: normal;}
   .gallery-top{ margin-bottom: 20px;
   }
   .swiper-slide{ border: 5px solid #fff;}
+  .gallery-thumbs .swiper-slide {
+    height: 100%;
+    // opacity: 1;
+  }
+ 
+}
+.gallery-thumbs .swiper-slide-thumb-active::after {
+  display: block; content: ''; width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: rgba(255, 255, 255, 0.5);
 }
 .close-btn{ position: fixed; right: 30px; top: 50px; z-index: 4;}
 .totop{ position: fixed; z-index: 2; left: 60px; bottom: 60px; cursor: pointer;
@@ -315,6 +339,7 @@ h3{ font-weight: normal;}
 .totop:hover .icon{background: url(../images/icon-top2.png)  no-repeat center;}
 .totop:hover{ color: #00a0e9;}
 .margin-b30{ margin-bottom: 30px;}
+.padding-tb0{ padding-top: 0; padding-bottom: 0;}
 
 @media (max-width: 1200px) {
   .fon32{ font-size: 28px;}
@@ -338,14 +363,23 @@ h3{ font-weight: normal;}
   .padding-r30 { padding-right: 15px;}
   .padding-l30 { padding-left: 15px;}
   }
-  
- 
+  .fon24{ font-size: 20px;}
+  .conact .contact-box{ width: 90%;  padding: 0 15px;}
+
 }
+.layui-flow-more{ width: 100%; text-align: center; clear: both;}
 @media (max-width: 1024px) {
   .fon40{ font-size: 25px}
+  .fon24{ font-size: 18px;}
   .w22{ width: 100%;}
   .w78{ width: 100%; margin-top: 20px;}
   .ipad-text-center{ text-align: center;}
+  .conact .contact-box{ width: 95%;    padding: 0 10px;}
+  .conact .txt{ height: 40px;}
+  .sheyingshi-img{ margin: 0 auto;}
+  .w40{ width: 100%; padding-top: 15px;padding-bottom: 20px; height: auto;}
+  .w60{ width: 100%; padding: 0 15px; position: static;}
+
 }
 @media (min-width: 768px) {
 }

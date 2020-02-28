@@ -46,7 +46,7 @@
           <span> 共235张</span>
         </div>
       </div>
-      <ul class="list row tuku_list flex" id="tuku_list">
+      <ul class="list row tuku_list " id="tuku_list">
         <!-- <li>
           <div class="sheying-img positionr">
             <img src="images/tuku-bg.jpg" alt="" srcset="" class="w100">
@@ -59,8 +59,8 @@
       </ul>
       <script id="tuku_tpl" type="text/html">
         {{#  layui.each(d.list, function(index, item){ }}
-        <li  class='col-sm-4 col-xs-6' >
-         <a href=""  class='positionr'>
+        <li  class="col-sm-4 col-xs-6" >
+         <a href=""  class="positionr">
           <div class="sheying-img positionr">
             <!-- 图片占位符，勿读后台 -->
             <img src="images/tuku-bg.jpg" alt="" srcset="" class="w100">
@@ -69,16 +69,15 @@
               <img src="{{item.img}}" alt="" srcset=""  class="w100 scale trans ">
             </div>
           </div>
-
           <div class="master flex flex-al-center  positionb trans  showGallery" >
-            <img src="images/icon-scale.png" alt="" srcset="" class='icon-scale trans '>
+            <img src="images/icon-scale.png" alt="" srcset="" class="icon-scale trans ">
           </div>
           <div class="share-title flex flex-al-center  trans">
-            <div  class='flex flex-al-center'>
+            <div  class="flex flex-al-center">
               <img src="images/icon-arv.png" alt="" srcset="">
-              <span class='fon18 colorf tu-author'>周鸣华</span>
+              <span class="fon18 colorf tu-author">周鸣华</span>
             </div>
-            <div class='share-icon'>
+            <div class="share-icon">
               <img src="images/icon-share.png" alt="" srcset="">
             </div>
           </div>
@@ -100,21 +99,15 @@
         <div class="positionr">
           <div class="swiper-container gallery-top  ">
             <div class="swiper-wrapper" id="viewLarge">
-              <div class="swiper-slide positionr">
-                <!-- 图片占位符 -->
-                <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
-                <div class="positionb">
-                  <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
-                </div>
-              </div>
+             
             </div>
             <script id="tuku_large_tpl" type="text/html">
               {{#  layui.each(d.list, function(index, item){ }}
               <div class="swiper-slide positionr">
                 <!-- 图片占位符 -->
-                <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+                <img src="images/sheyingshi-zuopin-bg.jpg" alt="" class="w100">
                 <div class="positionb">
-                  <img src="item.largeImg"" alt="" class="w100">
+                  <img src="{{item.largeImg}}" alt="" class="w100">
                 </div>
               </div>
                 {{#  }); }}
@@ -127,23 +120,15 @@
 
         <div class="swiper-container gallery-thumbs">
           <div class="swiper-wrapper " id="viewSmall">
-            <div class="swiper-slide positionr">
-              <!--图片占位符，勿读后台  -->
-              <img src="images/zuopin-xiaotu.jpg" alt="" srcset="" class="w100">
-              <!--end 图片占位符，勿读后台  -->
-              <div class="positionb">
-                <img src="images/zuopin-xiaotu.jpg" alt="" srcset="" class="w100">
-              </div>
-            </div>
-
+        
           </div>
           <script id="tuku_small_tpl" type="text/html">
             {{#  layui.each(d.list, function(index, item){ }}
             <div class="swiper-slide positionr">
               <!-- 图片占位符 -->
-              <img src="images/sheyingshi-zuopin.jpg" alt="" class="w100">
+              <img src="images/zuopin-xiaotu-bg.jpg" alt="" class="w100">
               <div class="positionb">
-                <img src="item.smallImg"" alt="" class="w100">
+                <img src="{{item.smallImg}}" alt="" class="w100 show">
               </div>
             </div>
               {{#  }); }}
@@ -155,7 +140,7 @@
   </div>
   <script>
    
-    layui.use('laytpl', function () {
+    layui.use(['laytpl', 'flow'], function () {
       var laytpl = layui.laytpl;
       var tuku_list = {
         //图库data
@@ -229,8 +214,16 @@
             "largeImg": "images/sheyingshi-zuopin.jpg"
           },
           {
+            "smallImg": "images/zuopin-xiaotu-bg.jpg",
+            "largeImg": "images/sheyingshi-zuopin-bg.jpg"
+          },
+          {
             "smallImg": "images/zuopin-xiaotu.jpg",
             "largeImg": "images/sheyingshi-zuopin.jpg"
+          },
+          {
+            "smallImg": "images/zuopin-xiaotu-bg.jpg",
+            "largeImg": "images/sheyingshi-zuopin-bg.jpg"
           },
           {
             "smallImg": "images/zuopin-xiaotu.jpg",
@@ -249,19 +242,12 @@
             "largeImg": "images/sheyingshi-zuopin.jpg"
           },
           {
-            "smallImg": "images/zuopin-xiaotu.jpg",
-            "largeImg": "images/sheyingshi-zuopin.jpg"
-          },
-          {
-            "smallImg": "images/zuopin-xiaotu.jpg",
-            "largeImg": "images/sheyingshi-zuopin.jpg"
-          },
-          {
-            "smallImg": "images/zuopin-xiaotu.jpg",
-            "largeImg": "images/sheyingshi-zuopin.jpg"
+            "smallImg": "images/zuopin-xiaotu-bg.jpg",
+            "largeImg": "images/sheyingshi-zuopin-bg.jpg"
           }
         ]
       }
+     
       var tuku_tpls = tuku_tpl.innerHTML;
       var tuku_tpls_large = tuku_large_tpl.innerHTML;
       var tuku_tpls_small = tuku_small_tpl.innerHTML;
@@ -271,13 +257,34 @@
       laytpl(tuku_tpls).render(tuku_list, function (html) {
         view.innerHTML = html;
         // 显示图库详情列表
-        $('.showGallery').click(function (e) {
-          e.preventDefault();
-          console.log($(this).parent().parent().index())
-          console.log('ajax更新swiper数据，并且重新初始化')
-          $('.fix-tuku').addClass('active');
-        });
+        // $('.showGallery').click(function (e) {
+        //   e.preventDefault();
+        //   console.log($(this).parent().parent().index())
+        //   console.log('ajax更新swiper数据，并且重新初始化')
+        //   $('.fix-tuku').addClass('active');
+        // });
       });
+      
+      var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+          var flow = layui.flow;
+          flow.load({
+            elem: '#tuku_list' //指定列表容器
+            ,isLazyimg:false
+            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+              var lis = [];
+              //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+              $.get('js/list_tuku.json?page=' + page, function (res) {
+                //假设你的列表返回在data集合中
+                layui.each(res.list, function (index, item) {
+                  lis.push(' <li class="col-sm-4 col-xs-6" ><a href=""  class="positionr"><div class="sheying-img positionr"><img src="images/tuku-bg.jpg" alt="" srcset="" class="w100"><div class="positionb"><img src="'+item.img+'" alt="" srcset=""  class="w100 scale trans "></div></div><div class="master flex flex-al-center  positionb trans  showGallery" ><img src="images/icon-scale.png" alt="" srcset="" class="icon-scale trans "></div><div class="share-title flex flex-al-center  trans"><div  class="flex flex-al-center"><img src="images/icon-arv.png" alt="" srcset=""><span class="fon18 colorf tu-author">'+item.name+'</span></div><div class="share-icon"><img src="images/icon-share.png" alt="" srcset=""> </div></div></a></li>');
+                });
+                next(lis.join(''), page < res.pages);
+              });
+            }
+          });
+
+      
+      
       laytpl(tuku_tpls_large).render(tuku_d_list, function (html) {
         viewLarge.innerHTML = html;
       });
@@ -328,14 +335,18 @@
   <script>
 
     $(function () {
-
+     
       $('.close-btn').click(function (e) {
         e.preventDefault();
         $('.fix-tuku').removeClass('active');
 
       });
+     
 
     })
+    window.onload = function(){
+      $('header nav li').eq(0).addClass('active')
+    }
   </script>
 
 

@@ -51,6 +51,9 @@
     transform: translateX(0);
     transition: .3s linear all;
   }
+  .about-con {
+    padding: 10px 0;
+  }
   .main.active {
     transform: translateX(105px);
   }
@@ -77,19 +80,11 @@
   .padding-b30 {
     padding-bottom: 15px;
   }
-  .w40 {
-    width: 100%;
-    padding-top: 15px;
-  }
-  .w60 {
-    width: 100%;
-    padding: 0 15px;
-  }
   .main {
     padding-bottom: 30px;
   }
   .sheyingshi {
-    padding: 0 15px;
+    padding: 0 5px;
   }
   .sheyingshi .list li {
     padding: 0 8px;
@@ -98,6 +93,9 @@
   }
   .sheyingshi .name {
     height: 30px;
+  }
+  .sheyingshi .gallery-thumbs {
+    padding-bottom: 20px;
   }
   .conact .contact-box {
     padding: 20px 5px;
@@ -160,7 +158,22 @@
   .conact .contact-box {
     width: 100%;
     padding-top: 50px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.65);
     min-height: 100%;
+  }
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .tuku_list li {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 15px;
+  }
+  .w60 {
+    position: static;
+  }
+  .w40 {
+    height: auto;
   }
 }
